@@ -1,0 +1,193 @@
+﻿@model AdminViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+@section Styles {
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href='/lib/fullcalendar/core/main.css' rel='stylesheet' />
+    <link href='/lib/fullcalendar/daygrid/main.css' rel='stylesheet' />
+    <link href="~/lib/fullcalendar/timegrid/main.css" rel="stylesheet" />
+    <link href="~/lib/fullcalendar/list/main.css" rel="stylesheet" />
+    <link href="~/lib/fullcalendar/bootstrap/main.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+}
+<h1 class="text-center">Randevularınız için Lütfen Aşağıdaki Yerleri Doldurunuz.</h1>
+
+            <div class="modal-body">
+                <form>
+                    
+                    <div class="row">
+                        <div class=" col-md-2">
+                        </div>
+                    </div>
+                    <div class="row">
+                        
+                        <div class="form-group col-md-6">
+                            <label class="form-control-label">Adınız : </label>
+                            <input id="inputName" type="text" class="form-control" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-control-label">Soyadınız : </label>
+                            <input id="inputSurname" type="text" class="form-control" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-control-label">Randevu Başlangıç Tarihi : </label>
+                            <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                                <input id="inputStartDate" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" />
+                                <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-control-label">Randevu Bitiş Tarihi : </label>
+                            <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+                                <input id="inputEndDate" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2" />
+                                <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="form-control-label">Araba Modelini Giriniz : </label>
+                            <input id="inputCarName" type="text" class="form-control" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-control-label">Model Yılı : </label>
+                            <input id="inputCarModel" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="form-control-label">Telefon Numaranız : </label>
+                            <input id="inputPhoneNumber" type="text" class="form-control" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-control-label">İl : </label>
+                            <input id="inputil" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="form-control-label">Plakanız : </label>
+                            <input id="inputPlaka" type="text" class="form-control" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-control-label">Eklemek İstediğiniz Açıklamayı Buraya Giriniz. : </label>
+                            <input id="inputDescription" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    
+                </form>
+            </div>
+            <div class="modal-footer">
+                    <div class="form-group col-md-6">
+                        <button id="btnSave" type="button" class="btn btn-primary">Gönder</button>
+                    </div>
+                </div>
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.28/moment-timezone-with-data-10-year-range.js"></script>
+    <script src='~/lib/fullcalendar/core/main.js'></script>
+    <script src='~/lib/fullcalendar/moment/main.js'></script>
+    <script src='~/lib/fullcalendar/moment-timezone/main.js'></script>
+    <script src="/lib/fullcalendar/daygrid/main.js"></script>
+    <script src="~/lib/fullcalendar/timegrid/main.js"></script>
+    <script src="~/lib/fullcalendar/list/main.js"></script>
+    <script src="~/lib/fullcalendar/interaction/main.js"></script>
+    <script src="~/lib/fullcalendar/bootstrap/main.js"></script>
+    <script src="~/lib/fullcalendar/core/locales/tr.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script type="text/javascript">
+        $('#datetimepicker1, #datetimepicker2').datetimepicker({
+            format: 'DD/MM/YYYY HH:mm'
+        });
+        function getAppointments() {
+            $.ajax({
+                type: 'GET',
+                url: '/appointment/GetAppointments',
+                success: function (response) {
+                    events = [];
+                    
+                    for (var i = 0; i < response.length; i++) {
+                        events.push({
+                            id: response[i].id,
+                            title: response[i].galleryUser,
+                            surname: response[i].surname,
+                            il: response[i].il,
+                            plaka: response[i].plaka,
+                            phoneNumber: response[i].phoneNumber,
+                            name: response[i].Name,
+                            carName: response[i].carName,
+                            carModel: response[i].carModel,
+                            start: response[i].startDate,
+                            end: response[i].endDate,
+                            description: response[i].description,
+                            color: response[i].color,
+                            userId: response[i].userId
+                        });
+                    }
+                    
+                },
+                error: function () {
+                   
+                    alertify.error('Randevunuz eklenirken bir problem oluştu.');
+                }
+            });
+        }
+        function saveAppointment(data)
+        {
+
+            $.ajax({
+                type: 'POST',
+                url: '/appointment/AddOrUpdateAppointment',
+                data: data,
+                success: function (response) {
+                    if (response === "200") {
+                        getAppointments(); 
+                        data.Id === "0" ? alertify.success('Randevunuz başarıyla güncellenmiştir.') : alertify.success('Randevunuz başarıyla eklendi.');
+                           
+                    }
+                    else {
+                       
+                        alertify.error('Randevu Tarihleri Başka Bir Randevu Tarihiyle Çakışıyor.');
+                    }
+                },
+                error: function () {
+                    
+                    alertify.error('Erişim sağlanamadı.');
+                }
+            });
+        }
+
+        $('#btnSave').click(function () {
+            //validasyon
+            if ($('input').val() === "") {
+                alert("Lütfen Boş Alanları Doldurunuz.");
+                return;
+            }
+            var appointment = {
+                Id: $('#apointmenttId').val(),
+                
+                Name: $('#inputName').val(),
+                Surname: $('#inputSurname').val(),
+                PhoneNumber: $('#inputPhoneNumber').val(),
+                Plaka: $('#inputPlaka').val(),
+                il: $('#inputil').val(),
+                StartDate: $('#inputStartDate').val(),
+                EndDate: $('#inputEndDate').val(),
+                CarName: $('#inputCarName').val(),
+                CarModel: $('#inputCarModel').val(),
+                Description: $('#inputDescription').val()
+            }
+
+            saveAppointment(appointment);
+
+            
+        });
+    </script>
+            
+    
+    }
