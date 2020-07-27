@@ -12,8 +12,16 @@ namespace AppointmentSystem.Models
     public class AdminViewModel
     {
         public AppUser User { get; set; }
-        
+
+        //IEnumerable hafızadaki koleksiyonlar için kullanılır.Yani şöyle anlatıyım aslında bir çok yerde kullandığımız
+        //foreach döngüsü üzerinden kullanılmaktadır.Hafızadaki koleksiyonlar diyorum diğer döngüler
+        //    içinde olabilir ama hafızadaki koleksiyonlar daha idealdir. 
+
+        //IQueryable ise belli bir uzak veri kaynağından(web service, database) verileri sorgulamak için idealdir.
         public IEnumerable<Appointment> GalleryUsers { get; set; }
+
+        //IList bir interfacedir.IEnurable arayüzlerini referans alır ve bunlardan farklı olarak Insert,RemoveAt
+        //    gibi metodları alır.Yani bir interface olduğu için içinde veri saklamaz.
         public IList<Appointment> Appointment { get; set; }
         public IList<SelectListItem> GalleryUsersSelectList { get; internal set; }
         public IList<Cities> Cities { get; set; }
