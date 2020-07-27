@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AppointmentSystem.Controllers
 {
-    [Authorize(Roles = "Admin, GalleryUser")]
+    [Authorize(Roles = "Admin")]
     public class ProfileController : Controller
     {
         private UserManager<AppUser> _userManager;
@@ -54,23 +54,7 @@ namespace AppointmentSystem.Controllers
                 };
                 return View("Admin", model);
             }
-            else
-            {
-                var appo = param is null ?
-                    _context.Appointments.ToList() :
-                    _context.Appointments.Where(ap => ap.Plaka.Contains(param)).ToList();
-                AdminViewModel model = new AdminViewModel()
-                {
-                    User = user,
-                    GalleryUsers = appo,
-                    GalleryUsersSelectList = appo.Select(n => new SelectListItem
-                    {
-                       
-                        Text = $" {n.Name} {n.Surname}"
-                    }).ToList()
-                };
-                return View("GalleryUser", model);
-            }
+            return View();
         }
        public IActionResult get(string param)
         {
@@ -86,20 +70,12 @@ namespace AppointmentSystem.Controllers
             {
                 User = user,
                 Appointment = appo,
-                GalleryUsersSelectList = appo.Select(n => new SelectListItem
-                {
-                    //Value = appo.Id,
-                    Text = $" {n.Name} {n.Surname}"
-                }).ToList()
+               
             };
-            return View("getTable", model);
+            return View("get", model);
         }
       
-        [Authorize(Roles = "GalleryUser")]
-        public IActionResult GalleryUser()
-        {
-            return View();
-        }
+       
 
     }
 }

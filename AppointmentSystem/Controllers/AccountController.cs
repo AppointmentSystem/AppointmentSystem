@@ -23,7 +23,6 @@ namespace AppointmentSystem.Controllers
             _roleManager = roleManager;
         }
 
-
         public IActionResult Login()
         {
             return View();
@@ -59,9 +58,6 @@ namespace AppointmentSystem.Controllers
         {
             return View();
         }
-
-       
-
         public IActionResult LogOut()
         {
             _signInManager.SignOutAsync().Wait();
@@ -72,7 +68,6 @@ namespace AppointmentSystem.Controllers
         {
             return View();
         }
-
 
         private bool AddRole(string roleName)
         {
@@ -89,9 +84,6 @@ namespace AppointmentSystem.Controllers
             return true;
         }
 
-        //public IActionResult GetUserList(AdminViewModel model)
-        //{
-            
-        //}
+    
     }
 }

@@ -16,7 +16,8 @@ namespace AppointmentSystem.Models
         public IEnumerable<Appointment> GalleryUsers { get; set; }
         public IList<Appointment> Appointment { get; set; }
         public IList<SelectListItem> GalleryUsersSelectList { get; internal set; }
+        public IList<Cities> Cities { get; set; }
 
-        
+
     }
 }

@@ -70,12 +70,12 @@ namespace AppointmentSystem.Controllers
             //Validasyon
             if (model.Id == 0)
             {
-                var check = _context.Appointments.Where(x => x.StartDate == model.StartDate && x.EndDate == model.EndDate);
-            if (check != null)
-            {
-                return Json("Error");
+            //    var check = _context.Appointments.Where(x => x.StartDate == model.StartDate && x.EndDate == model.EndDate);
+            //if (check != null)
+            //{
+            //    return Json("Error");
                     
-            }
+            //}
                 Appointment entity = new Appointment()
                 {
                     Surname = model.Surname,
@@ -85,7 +85,7 @@ namespace AppointmentSystem.Controllers
                     Name = model.Name,
                     CreatedDate = DateTime.Now,
                     StartDate = model.StartDate, 
-                    EndDate = model.EndDate,
+                    Id=model.Id,
                     CarName = model.CarName,
                     CarModel = model.CarModel,
                     Description = model.Description,
@@ -112,7 +112,7 @@ namespace AppointmentSystem.Controllers
                 entity.CarModel = model.CarModel;
                 entity.Description = model.Description;
                 entity.StartDate = model.StartDate;
-                entity.EndDate = model.EndDate;
+              
                 entity.UserId = model.UserId;
 
                 _context.Update(entity);

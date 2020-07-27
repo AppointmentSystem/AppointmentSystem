@@ -4,11 +4,6 @@
 }
 @section Styles {
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <link href='/lib/fullcalendar/core/main.css' rel='stylesheet' />
-    <link href='/lib/fullcalendar/daygrid/main.css' rel='stylesheet' />
-    <link href="~/lib/fullcalendar/timegrid/main.css" rel="stylesheet" />
-    <link href="~/lib/fullcalendar/list/main.css" rel="stylesheet" />
-    <link href="~/lib/fullcalendar/bootstrap/main.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css" />
 }
 <h1 class="text-center">Randevularınız için Lütfen Aşağıdaki Yerleri Doldurunuz.</h1>
@@ -21,7 +16,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        
+
                         <div class="form-group col-md-6">
                             <label class="form-control-label">Adınız : </label>
                             <input id="inputName" type="text" class="form-control" />
@@ -31,7 +26,7 @@
                             <input id="inputSurname" type="text" class="form-control" />
                         </div>
                         <div class="form-group col-md-6">
-                            <label class="form-control-label">Randevu Başlangıç Tarihi : </label>
+                            <label class="form-control-label">Randevu Tarihi : </label>
                             <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
                                 <input id="inputStartDate" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" />
                                 <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
@@ -40,14 +35,19 @@
                             </div>
                         </div>
                         <div class="form-group col-md-6">
-                            <label class="form-control-label">Randevu Bitiş Tarihi : </label>
-                            <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-                                <input id="inputEndDate" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2" />
-                                <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                </div>
-                            </div>
+                            <label class="form-control-label">Randevu Saati : </label>
+                            <select id="inputsaat" class="custom-select mr-sm-2">
+                                <option selected="selected" value="09:00">09:00</option>
+                                <option value="10:00">10:00</option>
+                                <option value="11:00">11:00</option>
+                                <option value="13:00">13:00</option>
+                                <option value="14:00">14:00</option>
+                                <option value="15:00">15:00</option>
+                                <option value="16:00">16:00</option>
+                                <option value="17:00">17:00</option>
+                            </select>
                         </div>
+
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
@@ -66,7 +66,10 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label class="form-control-label">İl : </label>
-                            <input id="inputil" type="text" class="form-control" />
+                            <select id="inputil"  class="custom-select mr-sm-2"
+                                    asp-items="Html.GetEnumSelectList<Cities>()">
+                                <option selected="selected" value="">Lütfen İl Seçiniz</option>
+                            </select>
                         </div>
                     </div>
                     <div class="row">
@@ -90,19 +93,10 @@
 @section Scripts {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.28/moment-timezone-with-data-10-year-range.js"></script>
-    <script src='~/lib/fullcalendar/core/main.js'></script>
-    <script src='~/lib/fullcalendar/moment/main.js'></script>
-    <script src='~/lib/fullcalendar/moment-timezone/main.js'></script>
-    <script src="/lib/fullcalendar/daygrid/main.js"></script>
-    <script src="~/lib/fullcalendar/timegrid/main.js"></script>
-    <script src="~/lib/fullcalendar/list/main.js"></script>
-    <script src="~/lib/fullcalendar/interaction/main.js"></script>
-    <script src="~/lib/fullcalendar/bootstrap/main.js"></script>
-    <script src="~/lib/fullcalendar/core/locales/tr.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
     <script type="text/javascript">
-        $('#datetimepicker1, #datetimepicker2').datetimepicker({
-            format: 'DD/MM/YYYY HH:mm'
+        $('#datetimepicker1').datetimepicker({
+            format: 'DD/MM/YYYY'
         });
         function getAppointments() {
             $.ajax({
@@ -139,7 +133,7 @@
         }
         function saveAppointment(data)
         {
-
+            alert(data);
             $.ajax({
                 type: 'POST',
                 url: '/appointment/AddOrUpdateAppointment',
@@ -168,9 +162,10 @@
                 alert("Lütfen Boş Alanları Doldurunuz.");
                 return;
             }
+            alert($('#inputsaat').val())
             var appointment = {
                 Id: $('#apointmenttId').val(),
-                
+                UserId: $('#inputil').val(),
                 Name: $('#inputName').val(),
                 Surname: $('#inputSurname').val(),
                 PhoneNumber: $('#inputPhoneNumber').val(),
