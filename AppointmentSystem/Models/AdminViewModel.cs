@@ -11,6 +11,7 @@ namespace AppointmentSystem.Models
 {
     public class AdminViewModel
     {
+
         public AppUser User { get; set; }
 
         //IEnumerable hafızadaki koleksiyonlar için kullanılır.Yani şöyle anlatıyım aslında bir çok yerde kullandığımız
@@ -22,15 +23,13 @@ namespace AppointmentSystem.Models
 
         //IList bir interfacedir.IEnurable arayüzlerini referans alır ve bunlardan farklı olarak Insert,RemoveAt
         //    gibi metodları alır.Yani bir interface olduğu için içinde veri saklamaz.
-        public IList<Appointment> Appointment { get; set; }
-
+        public IEnumerable<Appointment> Appointment { get; set; }
+       
         //internal set ise bir özelliğin değerinin yalnızca aynı derleme içindeki kodla ayarlanmasını sağlayan bir yapıdır diyebiliriz.
         //Diğer programcılar tarafından kullanılmak üzere bir API tasarladığınızı varsayalım.Bu API içinde bir özelliğe sahip
         //bir nesneniz var. Diğer programcıların nesnelerinize başvurduklarında değerini ayarlamasını
         //istemezsiniz  ancak değeri API'nizden kendiniz ayarlamanız gerekir.Yani tam anlatabildim mi bilmiyorum :)
         public IList<SelectListItem> GalleryUsersSelectList { get; internal set; }
-        public IList<Cities> Cities { get; set; }
-
-
-    }
+        public IList<SelectListItem> CitiesSelectList { get; set; }
+}
 }

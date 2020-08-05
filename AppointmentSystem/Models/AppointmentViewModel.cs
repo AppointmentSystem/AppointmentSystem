@@ -24,8 +24,7 @@ namespace AppointmentSystem
         [Required(ErrorMessage = "Lütfen kullanıcı adını belirtiniz.")]
         [Display(Name = "Kullanıcı Adınız:")]
         public string Name { get; set; }
-        public string GalleryUser { get; internal set; }
-        [Required(ErrorMessage = "Lütfen araba modelinizi belirtiniz.")]
+       
         
         public string CarName { get; internal set; }
         [Required(ErrorMessage = "Lütfen arabanızın model yılını belirtiniz.")]
@@ -36,11 +35,11 @@ namespace AppointmentSystem
         public DateTime StartDate { get; internal set; }
         [Required(ErrorMessage = "Lütfen randevu bitiş tarihini belirtiniz.")]
         
-        public DateTime EndDate { get; internal set; }
+      
         
         public string Description { get; internal set; }
         public string UserId { get; internal set; }
-        public string Color { get; internal set; }
+       
 
       
     }

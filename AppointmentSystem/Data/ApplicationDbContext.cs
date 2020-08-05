@@ -4,6 +4,8 @@ using System.Text;
 using AppointmentSystem.Data.Entity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using AppointmentSystem.Models;
+using AppointmentSystem;
 
 namespace AppointmentSystem.Data
 {
@@ -15,6 +17,10 @@ namespace AppointmentSystem.Data
         }
 
         public DbSet<Appointment> Appointments { get; set; }
-        
+
+        public DbSet<City> Cities { get; set; }
+
+
+
     }
 }

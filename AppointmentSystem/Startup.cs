@@ -28,6 +28,7 @@ namespace AppointmentSystem
       
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -49,10 +50,10 @@ namespace AppointmentSystem
 
             services.ConfigureApplicationCookie(options =>
             {
-                options.LoginPath = "/Account/Register";
+                options.LoginPath = "/Appointment/Register";
                 options.LogoutPath = "/Account/Logout";
                 options.AccessDeniedPath = "/Account/Denied";
-                options.Cookie.Name = "GalleryUser.Cookie";
+               
                 options.SlidingExpiration = true;
             });
 
@@ -65,6 +66,7 @@ namespace AppointmentSystem
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -76,6 +78,10 @@ namespace AppointmentSystem
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseCors(builder => builder
+             .AllowAnyOrigin()
+             .AllowAnyMethod()
+             .AllowAnyHeader());
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

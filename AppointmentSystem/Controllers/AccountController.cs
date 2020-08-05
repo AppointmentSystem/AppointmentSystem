@@ -54,10 +54,8 @@ namespace AppointmentSystem.Controllers
             return View(model);
         }
 
-        public IActionResult Register()
-        {
-            return View();
-        }
+
+       
         public IActionResult LogOut()
         {
             _signInManager.SignOutAsync().Wait();

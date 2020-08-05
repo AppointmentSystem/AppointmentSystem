@@ -4,7 +4,7 @@
     "anonymousAuthentication": true,
     "iisExpress": {
       "applicationUrl": "http://localhost:57877",
-      "sslPort": 44358
+      "sslPort": 0
     }
   },
   "profiles": {
@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "DentistCalendar": {
+    "AppointmentSystem": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

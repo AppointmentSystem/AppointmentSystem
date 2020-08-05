@@ -36,7 +36,7 @@ namespace AppointmentSystem.Controllers
             {
                 var appo = param is null ?
                     _context.Appointments.ToList() :
-                    _context.Appointments.Where(ap => ap.Plaka.Contains(param)).ToList();
+                    _context.Appointments.Where(ap => ap.Plaka.Contains(param) || ap.Name.Contains(param)).ToList();
                 foreach (var item in appo)
                 {
                     var appoUser = item.User;
@@ -56,12 +56,12 @@ namespace AppointmentSystem.Controllers
             }
             return View();
         }
-       public IActionResult get(string param)
+       public IActionResult getTable(string param)
         {
             AppUser user = _userManager.Users.SingleOrDefault(x => x.UserName == HttpContext.User.Identity.Name);
             var appo = param is null ?
                     _context.Appointments.ToList() :
-                    _context.Appointments.Where(ap => ap.Plaka.Contains(param)).ToList();
+                    _context.Appointments.Where(ap => ap.Plaka.Contains(param) || ap.Name.Contains(param) ).ToList();
             foreach (var item in appo)
             {
                 var appoUser = item.User;
@@ -72,7 +72,7 @@ namespace AppointmentSystem.Controllers
                 Appointment = appo,
                
             };
-            return View("get", model);
+            return View("getTable", model);
         }
       
        

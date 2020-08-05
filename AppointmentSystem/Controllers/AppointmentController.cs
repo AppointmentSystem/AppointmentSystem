@@ -2,11 +2,14 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using AppointmentSystem.Data;
 using AppointmentSystem.Data.Entity;
 using AppointmentSystem.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,10 +22,26 @@ namespace AppointmentSystem.Controllers
         {
             _context = context;
         }
+
+        public IActionResult Register()
+        {
+            var cityList = _context.Cities.ToList();
+            AddOrUpdateAppointmentModel model = new AddOrUpdateAppointmentModel()
+            {
+            City = cityList.Select(n => new SelectListItem
+                {
+                    Value = n.Id.ToString(),
+                    Text = $" {n.Name} "
+                }).ToList()
+            };
+            return View(model);
+
+        }
+        
         public JsonResult GetAppointments()
         {
             var model = _context.Appointments
-                .Include(x => x.User).Select(x => new AppointmentViewModel()
+              .Select(x => new AppointmentViewModel()
                 {
                     Id = x.Id,
                     Name = x.Name,
@@ -34,7 +53,7 @@ namespace AppointmentSystem.Controllers
                     CarName = x.CarName,
                     CarModel = x.CarModel,
                     StartDate = x.StartDate,
-                    EndDate = x.EndDate,
+                   
                     Description = x.Description
                     
                 });
@@ -44,18 +63,18 @@ namespace AppointmentSystem.Controllers
         public JsonResult GetAppointmentsByUser(string userId = "")
         {
             var model = _context.Appointments.Where(x => x.UserId == userId)
-                .Include(x => x.User).Select(x => new AppointmentViewModel()
+              .Select(x => new AppointmentViewModel()
                 {
                     Surname = x.Surname,
                     PhoneNumber = x.PhoneNumber,
                     Plaka = x.Plaka,
                     il = x.il,
                     Id = x.Id,
-                    GalleryUser = x.Name + " " + x.Surname,
+                    
                     CarName = x.CarName,
                     CarModel = x.CarModel,
                     StartDate = x.StartDate,
-                    EndDate = x.EndDate,
+                   
                     Description = x.Description,
                     Name = x.Name,
                     UserId = x.UserId
@@ -91,7 +110,7 @@ namespace AppointmentSystem.Controllers
                     Description = model.Description,
                   
                 };
-
+               
                 _context.Add(entity);
                 _context.SaveChanges();
             }
@@ -112,7 +131,7 @@ namespace AppointmentSystem.Controllers
                 entity.CarModel = model.CarModel;
                 entity.Description = model.Description;
                 entity.StartDate = model.StartDate;
-              
+           
                 entity.UserId = model.UserId;
 
                 _context.Update(entity);
